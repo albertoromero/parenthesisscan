@@ -26,10 +26,26 @@ class Analize
         $close = substr_count($this->analize, ")");
 
         if ($open == $close) {
-            return true;
+            return ($this->alanalizethird());
         } else {
             return false;
         }
+    }
+
+    public function alanalizethird()
+    {
+        $open = 0;
+        $close = 0;
+
+        $separate = explode(" ", $this->analize);
+        foreach ($separate as $key => $value) {
+            $open += substr_count($value, "(");
+            $close += substr_count($value, ")");
+            if ($open < $close) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public function showName()
